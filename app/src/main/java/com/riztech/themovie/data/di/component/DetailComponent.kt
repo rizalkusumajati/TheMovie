@@ -6,7 +6,8 @@ import com.riztech.themovie.presentation.DetailFragment
 import dagger.Component
 
 @DetailScope
-@Component(modules = [DetailViewModelModule::class])
+@Component(dependencies = [CoreComponent::class],
+    modules = [DetailViewModelModule::class])
 interface DetailComponent {
     fun inject(detailFragment: DetailFragment)
 }

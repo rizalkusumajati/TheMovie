@@ -12,5 +12,5 @@ abstract class GenreViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(GenreViewModel::class)
-    abstract fun bindHomeViewModel(viewModel: GenreViewModel): ViewModel
+    abstract fun bindGenreViewModel(viewModel: GenreViewModel): ViewModel
 }

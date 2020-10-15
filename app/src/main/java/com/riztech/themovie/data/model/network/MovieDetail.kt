@@ -14,8 +14,8 @@ data class MovieDetail(
     val overview: String,
     val popularity: Double,
     val poster_path: String,
-    val production_companies: List<Any>,
-    val production_countries: List<Any>,
+    val production_companies: List<ProductionCompanies>,
+    val production_countries: List<ProductionCountries>,
     val release_date: String,
     val revenue: Int,
     val runtime: Int,
@@ -31,4 +31,16 @@ data class MovieDetail(
 data class SpokenLanguage(
     val iso_639_1: String,
     val name: String
+)
+
+data class ProductionCountries(
+    val iso_3166_1: String,
+    val name: String
+)
+
+data class ProductionCompanies(
+    val id: Int,
+    val name: String,
+    val logo_path: String,
+    val origin_country: String
 )

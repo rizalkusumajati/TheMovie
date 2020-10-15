@@ -6,7 +6,8 @@ import com.riztech.themovie.presentation.GenreFragment
 import dagger.Component
 
 @GenreScope
-@Component(modules = [GenreViewModelModule::class])
+@Component(dependencies = [CoreComponent::class],
+    modules = [GenreViewModelModule::class])
 interface GenreComponent {
     fun inject(genreFragment: GenreFragment)
 }

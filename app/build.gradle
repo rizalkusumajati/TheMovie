@@ -10,14 +10,14 @@ android {
 
     defaultConfig {
         applicationId "com.riztech.themovie"
-        minSdkVersion 16
+        minSdkVersion 17
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "BASE_URL", "\"https://implementation.themoviedb.org/3/\"")
+        buildConfigField("String", "BASE_URL", "\"https://api.themoviedb.org/3/\"")
         buildConfigField("String", "TMDB_implementation_KEY", "\"1557853c72890ec559e5ce537b9adb24\"")
     }
 
@@ -58,14 +58,13 @@ dependencies {
     // Room components
     implementation coreDependencies.roomRuntime
     implementation coreDependencies.room
-    annotationProcessor coreDependencies.roomCompiler
+    kapt coreDependencies.roomCompiler
     androidTestImplementation coreTestDependencies.roomTest
 
     // Retrofit
     // network
     implementation coreDependencies.retrofit
     implementation coreDependencies.retrofitGsonConverter
-    implementation coreDependencies.retrofitRxJava2Adapter
 
     implementation coreDependencies.okhttp
     implementation coreDependencies.okhttpInterceptor
@@ -87,6 +86,9 @@ dependencies {
     annotationProcessor appDependencies.lifecycleCompiler
 
     implementation appDependencies.circleImage
+    implementation appDependencies.glide
+    kapt appDependencies.glideCompiler
+    implementation appDependencies.youtubePlayer
 
 
 }

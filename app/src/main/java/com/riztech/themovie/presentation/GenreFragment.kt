@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.riztech.themovie.R
 import com.riztech.themovie.data.di.component.DaggerGenreComponent
+import com.riztech.themovie.util.coreComponent
 import javax.inject.Inject
 
 
@@ -27,7 +28,7 @@ class GenreFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        DaggerGenreComponent.builder().build().inject(this)
+        DaggerGenreComponent.builder().coreComponent(coreComponent()).build().inject(this)
     }
 
     override fun onCreateView(

@@ -14,7 +14,19 @@ class DbModule {
     fun provideMyDatabase(app: Application) = Room.databaseBuilder(app, TheMovieDb::class.java, "tmdb")
         .build()
 
-//    @Singleton
-//    @Provides
-//    fun provideAlbumDao(theMovieDb: TheMovieDb) = theMovieDb.leagueDao()
+    @Singleton
+    @Provides
+    fun provideGenreDao(theMovieDb: TheMovieDb) = theMovieDb.getGenreDao()
+
+    @Singleton
+    @Provides
+    fun provideMovieDao(theMovieDb: TheMovieDb) = theMovieDb.getMovieDao()
+
+    @Singleton
+    @Provides
+    fun provideMovieDetailDao(theMovieDb: TheMovieDb) = theMovieDb.getMovieDetailDao()
+
+    @Singleton
+    @Provides
+    fun provideMovieTrailerDao(theMovieDb: TheMovieDb) = theMovieDb.getMovieTrailerDao()
 }

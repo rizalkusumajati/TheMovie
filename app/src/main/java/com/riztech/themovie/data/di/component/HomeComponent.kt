@@ -7,6 +7,7 @@ import dagger.Component
 
 @HomeScope
 @Component(
+    dependencies = [CoreComponent::class],
     modules = [HomeViewModelModule::class])
 interface HomeComponent {
     fun inject(homeFragment: HomeFragment)

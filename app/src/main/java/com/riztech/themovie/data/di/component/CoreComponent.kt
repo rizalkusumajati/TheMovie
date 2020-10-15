@@ -3,7 +3,6 @@ package com.riztech.themovie.data.di.component
 import android.app.Application
 import android.content.SharedPreferences
 import com.riztech.themovie.data.api.MovieApi
-import com.riztech.themovie.data.db.MovieData
 import com.riztech.themovie.data.di.module.DbModule
 import com.riztech.themovie.data.di.module.NetworkModule
 import com.riztech.themovie.data.di.module.SharePrefModule

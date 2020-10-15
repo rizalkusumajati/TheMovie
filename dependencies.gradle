@@ -1,0 +1,93 @@
+ext{
+    // Android
+    minSdkVersion = 21
+    targetSdkVersion = 29
+    versionCode = 1
+    versionName = "1.0"
+    androidCompileSdkVersion = 29
+    buildToolsVersion = "29.0.3"
+    testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
+
+    //core
+    kotlinCoreVersion = "1.3.1"
+    coroutinesVersion = "1.3.9"
+    appCompatVersion = "1.2.0"
+    constraintLayoutVersion = "2.0.1"
+    legacySupportVersion = "1.0.0"
+    retrofit2Version = '2.8.1'
+    okhttpVersion = "4.2.1"
+    roomVersion = '2.2.1'
+
+    //coreTest
+    jUnitVersion = "4.12"
+    testExtVersion = "1.1.2"
+    espressoVersion = "3.3.0"
+
+    //app
+    shimmerVersion = "0.5.0"
+    materialVersion = "1.2.0"
+    archLifecycleVersion = '2.2.0'
+    navigationVersion = "2.3.0"
+    cardViewVersion = "1.0.0"
+    circleImageVersion = "3.1.0"
+    gmapsVersion = "17.0.0"
+    daggerVersion = "2.28.3"
+    placesVersion = "2.2.0"
+
+    coreDependencies = [
+            kotlin                : "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion",
+            kotlinCore            : "androidx.core:core-ktx:$kotlinCoreVersion",
+            kotlinCoroutines      : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion",
+            coroutinesAndroid     : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion",
+            appCompat             : "androidx.appcompat:appcompat:$appCompatVersion",
+            constraintLayout      : "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion",
+            legacySupport         : "androidx.legacy:legacy-support-v4:$legacySupportVersion",
+            shimmer               : "com.facebook.shimmer:shimmer:$shimmerVersion",
+            material              : "com.google.android.material:material:$materialVersion",
+            dagger                : "com.google.dagger:dagger:$daggerVersion",
+            daggerSupport         : "com.google.dagger:dagger-android-support:$daggerVersion",
+            daggerCompiler        : "com.google.dagger:dagger-compiler:$daggerVersion",
+            roomRuntime           : "androidx.room:room-runtime:$roomVersion",
+            room                  : "androidx.room:room-ktx:$roomVersion",
+            roomCompiler          : "androidx.room:room-compiler:$roomVersion",
+            retrofit              : "com.squareup.retrofit2:retrofit:$retrofit2Version",
+            retrofitRxJava2Adapter: "com.squareup.retrofit2:adapter-rxjava2:$retrofit2Version",
+            retrofitGsonConverter : "com.squareup.retrofit2:converter-gson:$retrofit2Version",
+            okhttp                : "com.squareup.okhttp3:okhttp:$okhttpVersion",
+            okhttpInterceptor     : "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
+
+    ]
+
+    coreTestDependencies = [
+            jUnit                 : "junit:junit:$jUnitVersion",
+            testExt               : "androidx.test.ext:junit:$testExtVersion",
+            espresso              : "androidx.test.espresso:espresso-core:$espressoVersion",
+            roomTest              : "androidx.room:room-testing:$roomVersion"
+    ]
+
+    appDependencies = [
+            shimmer               : "com.facebook.shimmer:shimmer:$shimmerVersion",
+            material              : "com.google.android.material:material:$materialVersion",
+            cardView              : "androidx.cardview:cardview:$cardViewVersion",
+            navFragment           : "androidx.navigation:navigation-fragment-ktx:$navigationVersion",
+            navUI                 : "androidx.navigation:navigation-ui-ktx:$navigationVersion",
+            navFeatureModule      : "androidx.navigation:navigation-dynamic-features-fragment:$navigationVersion",
+            roomRuntime           : "androidx.room:room-runtime:$roomVersion",
+            room                  : "androidx.room:room-ktx:$roomVersion",
+            roomCompiler          : "androidx.room:room-compiler:$roomVersion",
+            lifecycle             : "androidx.lifecycle:lifecycle-extensions:$archLifecycleVersion",
+            lifecycleCompiler     : "androidx.lifecycle:lifecycle-compiler:$archLifecycleVersion",
+            circleImage           : "de.hdodenhof:circleimageview:$circleImageVersion",
+            gmaps                 : "com.google.android.gms:play-services-maps:$gmapsVersion",
+            fusedLocation         : "com.google.android.gms:play-services-location:$gmapsVersion",
+            places                : "com.google.android.libraries.places:places:$placesVersion",
+            dagger                : "com.google.dagger:dagger:$daggerVersion",
+            daggerSupport         : "com.google.dagger:dagger-android-support:$daggerVersion",
+            daggerCompiler        : "com.google.dagger:dagger-compiler:$daggerVersion"
+
+    ]
+
+    appTestDependencies = [
+            roomTest              :"androidx.room:room-testing:$roomVersion"
+    ]
+}

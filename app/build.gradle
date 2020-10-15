@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: "androidx.navigation.safeargs.kotlin"
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 29
@@ -14,6 +16,9 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "BASE_URL", "\"https://implementation.themoviedb.org/3/\"")
+        buildConfigField("String", "TMDB_implementation_KEY", "\"1557853c72890ec559e5ce537b9adb24\"")
     }
 
     buildTypes {
@@ -22,16 +27,66 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
 }
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.3.1'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    def coreDependencies = rootProject.ext.coreDependencies
+    def coreTestDependencies = rootProject.ext.coreTestDependencies
+
+    implementation coreDependencies.kotlin
+    implementation coreDependencies.kotlinCoroutines
+    implementation coreDependencies.kotlinCore
+    implementation coreDependencies.appCompat
+    implementation coreDependencies.constraintLayout
+    implementation coreDependencies.legacySupport
+
+    // Dagger
+    implementation coreDependencies.dagger
+    implementation coreDependencies.daggerSupport
+    kapt coreDependencies.daggerCompiler
+
+    // Room components
+    implementation coreDependencies.roomRuntime
+    implementation coreDependencies.room
+    annotationProcessor coreDependencies.roomCompiler
+    androidTestImplementation coreTestDependencies.roomTest
+
+    // Retrofit
+    // network
+    implementation coreDependencies.retrofit
+    implementation coreDependencies.retrofitGsonConverter
+    implementation coreDependencies.retrofitRxJava2Adapter
+
+    implementation coreDependencies.okhttp
+    implementation coreDependencies.okhttpInterceptor
+
+    testImplementation coreTestDependencies.jUnit
+    androidTestImplementation coreTestDependencies.testExt
+    androidTestImplementation coreTestDependencies.espresso
+
+    def appDependencies = rootProject.ext.appDependencies
+
+    // Navigation
+    implementation appDependencies.navFragment
+    implementation appDependencies.navUI
+    implementation appDependencies.navFeatureModule
+
+
+    // Lifecycle components
+    implementation appDependencies.lifecycle
+    annotationProcessor appDependencies.lifecycleCompiler
+
+    implementation appDependencies.circleImage
+
 
 }

@@ -2,11 +2,11 @@ package com.riztech.themovie.presentation
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -16,11 +16,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.riztech.themovie.R
 import com.riztech.themovie.data.di.component.DaggerMovieListComponent
 import com.riztech.themovie.domain.model.HomeMovie
+import com.riztech.themovie.util.EndlessOnScrollListener
 import com.riztech.themovie.util.Status
 import com.riztech.themovie.util.coreComponent
-import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_movie_list.*
-import kotlinx.android.synthetic.main.fragment_movie_list.progressBar
 import javax.inject.Inject
 
 
@@ -55,7 +54,7 @@ class MovieListFragment : Fragment(), MovieListAdapter.OnClickMovieListItem {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getMovieByGenre(1, genreBundle.genre)
+        viewModel.getMovieByGenre(genreBundle.genre)
 
         rvMovieList.layoutManager = GridLayoutManager(requireContext(), 2)
         adapter = MovieListAdapter(arrayListOf(), this)
@@ -66,6 +65,12 @@ class MovieListFragment : Fragment(), MovieListAdapter.OnClickMovieListItem {
             )
         )
         rvMovieList.adapter = adapter
+
+        rvMovieList.addOnScrollListener(object : EndlessOnScrollListener() {
+            override fun onLoadMore() {
+                viewModel.getMovieByGenre(genreBundle.genre)
+            }
+        })
 
         viewModel._movies.observe(viewLifecycleOwner, Observer {
             it?.let { resource ->
@@ -95,6 +100,8 @@ class MovieListFragment : Fragment(), MovieListAdapter.OnClickMovieListItem {
 
     override fun clickMovie(homeMovie: HomeMovie) {
        val action = MovieListFragmentDirections.goToDetail(homeMovie.id, homeMovie.video, homeMovie.coverUrl)
+        viewModel._page = 1
+        adapter.clearData()
         findNavController().navigate(action)
     }
 }

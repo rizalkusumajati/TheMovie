@@ -1,18 +1,22 @@
 package com.riztech.themovie.data.repository
 
 import android.util.Log
-import com.bumptech.glide.load.HttpException
+import com.google.gson.Gson
+import com.google.gson.TypeAdapter
 import com.riztech.themovie.data.api.MovieApi
 import com.riztech.themovie.data.db.MoviesDao
 import com.riztech.themovie.data.mappers.DataNetworkToLocal
 import com.riztech.themovie.data.mappers.DataToDomain
+import com.riztech.themovie.data.model.network.ErrorResponse
 import com.riztech.themovie.domain.model.HomeMovie
 import com.riztech.themovie.domain.repository.MovieListRepository
 import com.riztech.themovie.util.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
+
 
 class MovieListRepositoryImpl @Inject constructor(
     private val movieApi: MovieApi,
@@ -31,7 +35,15 @@ class MovieListRepositoryImpl @Inject constructor(
             } catch (error: IOException) {
                 Resource.error(null, error.message?: "Error")
             } catch (error: HttpException) {
-                Resource.error(null, error.message?: "Error")
+                val body = error.response()!!.errorBody()
+                val gson = Gson()
+                val adapter: TypeAdapter<ErrorResponse> = gson.getAdapter(ErrorResponse::class.java)
+                try {
+                    val errorParser: ErrorResponse = adapter.fromJson(body!!.string())
+                    Resource.error(null, errorParser.status_message?: "Error")
+                } catch (e: IOException) {
+                    Resource.error(null, error.message()?: "Error")
+                }
             }
         }
     }

@@ -17,6 +17,11 @@ class MovieListAdapter(private val listMovies: ArrayList<HomeMovie>, private val
         notifyDataSetChanged()
     }
 
+    fun clearData(){
+        listMovies.clear()
+        notifyDataSetChanged()
+    }
+
     interface OnClickMovieListItem{
         fun clickMovie(homeMovie: HomeMovie)
     }

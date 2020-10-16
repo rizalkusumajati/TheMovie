@@ -9,6 +9,7 @@ import com.riztech.themovie.domain.model.MovieTrailer
 import com.riztech.themovie.domain.model.Review
 import com.riztech.themovie.domain.usecase.DetailUseCaseImpl
 import com.riztech.themovie.util.Resource
+import com.riztech.themovie.util.Status
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -26,6 +27,8 @@ class DetailViewModel @Inject constructor(private val detailUseCaseImpl: DetailU
     val _reviews: LiveData<Resource<List<Review>>>
     get() = reviews
 
+    private var page = 1;
+
     fun getDetail(movieId: Int){
         detail.postValue(Resource.loading(null))
         viewModelScope.launch {
@@ -42,11 +45,14 @@ class DetailViewModel @Inject constructor(private val detailUseCaseImpl: DetailU
         }
     }
 
-    fun getReviews(movieId: Int, page: Int){
+    fun getReviews(movieId: Int){
         reviews.postValue(Resource.loading(null))
         viewModelScope.launch {
-            val reviewVal = detailUseCaseImpl.getReviews(movieId,page )
+            val reviewVal = detailUseCaseImpl.getReviews(movieId, page)
             reviews.postValue(reviewVal)
+            if (reviewVal.status == Status.SUCCESS){
+                page++
+            }
         }
     }
 }

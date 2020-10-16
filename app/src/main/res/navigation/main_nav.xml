@@ -13,9 +13,6 @@
         <action
             android:id="@+id/goToListMovie"
             app:destination="@id/movieListFragment" />
-        <action
-            android:id="@+id/goToAllGenre"
-            app:destination="@id/genreFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
@@ -45,14 +42,5 @@
         <argument
             android:name="genre"
             app:argType="integer" />
-    </fragment>
-    <fragment
-        android:id="@+id/genreFragment"
-        android:name="com.riztech.themovie.presentation.GenreFragment"
-        android:label="fragment_genre"
-        tools:layout="@layout/fragment_genre" >
-        <action
-            android:id="@+id/goToListMovie"
-            app:destination="@id/movieListFragment" />
     </fragment>
 </navigation>

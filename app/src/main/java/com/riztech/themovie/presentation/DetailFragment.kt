@@ -16,10 +16,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.riztech.themovie.R
 import com.riztech.themovie.data.di.component.DaggerDetailComponent
-import com.riztech.themovie.util.Status
-import com.riztech.themovie.util.coreComponent
-import com.riztech.themovie.util.getProgressDrawable
-import com.riztech.themovie.util.loadImage
+import com.riztech.themovie.util.*
 import kotlinx.android.synthetic.main.fragment_detail.*
 import kotlinx.android.synthetic.main.fragment_detail.progressBar
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -54,7 +51,7 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getDetail(movieBundle.movieId)
-        viewModel.getReviews(movieBundle.movieId, 1)
+        viewModel.getReviews(movieBundle.movieId)
 
         rvReview.layoutManager = LinearLayoutManager(requireContext())
         adapter = ReviewAdapter(arrayListOf())
@@ -65,6 +62,13 @@ class DetailFragment : Fragment() {
             )
         )
         rvReview.adapter = adapter
+
+        rvReview.addOnScrollListener(object : EndlessOnScrollListener(){
+            override fun onLoadMore() {
+                viewModel.getReviews(movieBundle.movieId)
+            }
+        })
+
 
         ivPosterDetail.loadImage("http://image.tmdb.org/t/p/w185/${movieBundle.poster}", getProgressDrawable(requireContext()), requireContext())
 

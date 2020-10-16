@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.riztech.themovie.presentation.HomeFragment"
-        android:label="fragment_home"
+        android:label="Movie Category"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/goToListMovie"
@@ -17,7 +17,7 @@
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.riztech.themovie.presentation.DetailFragment"
-        android:label="fragment_detail"
+        android:label="Movie Detail"
         tools:layout="@layout/fragment_detail" >
         <argument
             android:name="movieId"
@@ -34,7 +34,7 @@
     <fragment
         android:id="@+id/movieListFragment"
         android:name="com.riztech.themovie.presentation.MovieListFragment"
-        android:label="fragment_movie_list"
+        android:label="Movies"
         tools:layout="@layout/fragment_movie_list" >
         <action
             android:id="@+id/goToDetail"

@@ -58,12 +58,12 @@ class MovieListFragment : Fragment(), MovieListAdapter.OnClickMovieListItem {
 
         rvMovieList.layoutManager = GridLayoutManager(requireContext(), 2)
         adapter = MovieListAdapter(arrayListOf(), this)
-        rvMovieList.addItemDecoration(
-            DividerItemDecoration(
-                rvMovieList.context,
-                (rvMovieList.layoutManager as LinearLayoutManager).orientation
-            )
-        )
+//        rvMovieList.addItemDecoration(
+////            DividerItemDecoration(
+////                rvMovieList.context,
+////                (rvMovieList.layoutManager as LinearLayoutManager).orientation
+////            )
+////        )
         rvMovieList.adapter = adapter
 
         rvMovieList.addOnScrollListener(object : EndlessOnScrollListener() {

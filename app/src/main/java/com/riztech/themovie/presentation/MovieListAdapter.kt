@@ -32,6 +32,11 @@ class MovieListAdapter(private val listMovies: ArrayList<HomeMovie>, private val
                 ivPoster.loadImage("http://image.tmdb.org/t/p/w185/${homeMovie.coverUrl}", getProgressDrawable(context), context)
                 tvTitle.setText(homeMovie.movieTitle)
 
+                val year = homeMovie.year.split("-")[0]
+                year?.let {
+                    tvRelease.setText(year)
+                }
+
                 setOnClickListener {
                     listener.clickMovie(homeMovie)
                 }

@@ -4,5 +4,6 @@ data class HomeMovie (
     val id: Int,
     val coverUrl: String?,
     val movieTitle: String?,
-    val video: Boolean
+    val video: Boolean,
+    val year: String
 )

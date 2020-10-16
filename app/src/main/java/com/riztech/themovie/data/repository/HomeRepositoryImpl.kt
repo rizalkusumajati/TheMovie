@@ -23,8 +23,6 @@ class HomeRepositoryImpl @Inject constructor(private val movieApi: MovieApi, pri
             try {
                 movieApi.getMovieGenres()?.let {
                     genreDao.insertGenre(mapper.networkToLocalGenre(it))
-                    Log.d("TAG", "SUCCESS NETWORK")
-
                     Resource.success(mapperToDomain.toGenre(it))
 
                 }
@@ -49,7 +47,6 @@ class HomeRepositoryImpl @Inject constructor(private val movieApi: MovieApi, pri
         return withContext(Dispatchers.IO){
             val list = genreDao.select();
             if (list != null && list.size > 0){
-                Log.d("TAG", "SUCCESS LOCAL")
                Resource.success(mapperToDomain.toGenre(list))
             }else{
                 getGenreNetwork()

@@ -22,15 +22,7 @@ class HomeViewModel @Inject constructor(private val homeUseCaseImpl: HomeUseCase
         genre.postValue(Resource.loading(null))
         viewModelScope.launch {
             val list = homeUseCaseImpl.getGenre()
-            list.data?.let {
-                for (i in 0..list.data.size - 1) {
-                    println(list.data.get(i))
-                }
-            }
-
             genre.postValue(list)
-
-
         }
     }
 }

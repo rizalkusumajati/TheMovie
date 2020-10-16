@@ -19,7 +19,12 @@ import com.riztech.themovie.data.di.component.DaggerDetailComponent
 import com.riztech.themovie.util.*
 import kotlinx.android.synthetic.main.fragment_detail.*
 import kotlinx.android.synthetic.main.fragment_detail.progressBar
+import kotlinx.android.synthetic.main.fragment_detail.tvTitle
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.movie_home_list.*
+import kotlinx.android.synthetic.main.movie_home_list.view.*
+import kotlinx.android.synthetic.main.movie_home_list.view.tvRelease
+import kotlinx.android.synthetic.main.review_list.*
 import javax.inject.Inject
 
 class DetailFragment : Fragment() {
@@ -89,6 +94,12 @@ class DetailFragment : Fragment() {
                         progressBar.visibility = View.GONE
                         resource.data?.let {
                             tvTitle.setText(it.title)
+                            tvRating.setText("${it.vote_average} (${it.vote_count} votes)")
+                            val year = it.release_date.split("-")[0]
+                            year?.let {
+                                tvYear.setText(year)
+                            }
+                            tvGenre.setText("Genre : ${it.genres}")
                             tvOverview.setText(it.overview)
                         }
                     }
@@ -129,14 +140,22 @@ class DetailFragment : Fragment() {
             it?.let {resource ->
                 when (resource.status){
                     Status.SUCCESS ->{
+                        progressBar.visibility = View.GONE
                         resource.data?.let {
-                            adapter.addDataToExisting(it)
+                            it?.let {
+                                if (it.size > 0)
+                                infoReview.setText("REVIEW (${it.get(0).total})")
+
+                                adapter.addDataToExisting(it)
+                            }
+
                         }
                     }
                     Status.LOADING->{
-
+                        progressBar.visibility = View.VISIBLE
                     }
                     Status.ERROR-> {
+                        progressBar.visibility = View.GONE
                         Toast.makeText(requireContext(), "${resource.message}", Toast.LENGTH_SHORT).show()
                     }
 

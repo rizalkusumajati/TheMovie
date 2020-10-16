@@ -27,12 +27,6 @@ class MovieListViewModel @Inject constructor(private val movieListUseCaseImpl: M
             if (list.status == Status.SUCCESS){
                 _page++
             }
-            list.data?.let {
-                for (i in 0..list.data.size - 1) {
-                    println(list.data.get(i))
-                }
-            }
-
             movies.postValue(list)
 
 

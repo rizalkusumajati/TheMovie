@@ -63,12 +63,12 @@ class HomeFragment : Fragment(), HomeAdapter.OnClickHomeItem {
 
         rvHomeMovie.layoutManager = LinearLayoutManager(requireContext())
         adapter = HomeAdapter(arrayListOf(), this)
-        rvHomeMovie.addItemDecoration(
-            DividerItemDecoration(
-                rvHomeMovie.context,
-                (rvHomeMovie.layoutManager as LinearLayoutManager).orientation
-            )
-        )
+//        rvHomeMovie.addItemDecoration(
+//            DividerItemDecoration(
+//                rvHomeMovie.context,
+//                (rvHomeMovie.layoutManager as LinearLayoutManager).orientation
+//            )
+//        )
         rvHomeMovie.adapter = adapter
 
         viewModel._genre.observe(viewLifecycleOwner, Observer {

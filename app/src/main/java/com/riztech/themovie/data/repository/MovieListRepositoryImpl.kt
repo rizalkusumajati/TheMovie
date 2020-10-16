@@ -52,7 +52,6 @@ class MovieListRepositoryImpl @Inject constructor(
         return withContext(Dispatchers.IO){
             val list = moviesDao.select();
             if (list != null && list.size > 0){
-                Log.d("TAG", "SUCCESS LOCAL")
                 Resource.success(mapperToDomain.toHomeMovie(list))
             }else{
                 getMovieByGenreNetwork(page, genre)

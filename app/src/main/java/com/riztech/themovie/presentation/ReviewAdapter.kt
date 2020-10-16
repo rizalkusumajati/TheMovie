@@ -20,7 +20,7 @@ class ReviewAdapter (private val listMovies: ArrayList<Review>) : RecyclerView.A
         fun bind(review: Review){
             itemView.apply {
                 tvAuthor.setText(review.author)
-                tvOverview.setText(review.content)
+                tvReview.setText(review.content)
             }
         }
     }

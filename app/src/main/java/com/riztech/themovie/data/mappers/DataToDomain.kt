@@ -25,7 +25,8 @@ class DataToDomain @Inject constructor() {
                             resultMovie.id,
                             resultMovie.poster_path,
                             resultMovie.title,
-                            resultMovie.video
+                            resultMovie.video?:false,
+                            resultMovie.release_date?:""
                         )
                     )
                 }
@@ -40,7 +41,7 @@ class DataToDomain @Inject constructor() {
         movieList?.let {
             for (i in 0..it.size - 1) {
                 val resultMovie = it.get(i)
-                homeList.add(HomeMovie(resultMovie.id, resultMovie.posterPath, resultMovie.title, resultMovie.video))
+                homeList.add(HomeMovie(resultMovie.id, resultMovie.posterPath, resultMovie.title, resultMovie.video, resultMovie.releaseDate))
             }
         }
 
@@ -75,30 +76,30 @@ class DataToDomain @Inject constructor() {
 
     fun toDetail(detail: MovieDetail): com.riztech.themovie.domain.model.MovieDetail {
         return com.riztech.themovie.domain.model.MovieDetail(
-            detail.adult,
-            detail.backdrop_path,
-            detail.budget,
+            detail.adult?:false,
+            detail.backdrop_path?:"",
+            detail.budget?:0,
             convertGenre(detail.genres),
-            detail.homepage,
+            detail.homepage?:"",
             detail.id,
-            detail.imdb_id,
-            detail.original_language,
-            detail.original_title,
-            detail.overview,
-            detail.popularity,
-            detail.poster_path,
-            convertCompanies(detail.production_companies),
-            convertCountry(detail.production_countries),
-            detail.release_date,
-            detail.revenue,
-            detail.runtime,
-            convertLanguage(detail.spoken_languages),
-            detail.status,
-            detail.tagline,
-            detail.title,
-            detail.video,
-            detail.vote_average,
-            detail.vote_count
+            detail.imdb_id?:"",
+            detail.original_language?:"",
+            detail.original_title?:"",
+            detail.overview?:"",
+            detail.popularity?:0.0,
+            detail.poster_path?:"",
+            convertCompanies(detail.production_companies)?:"",
+            convertCountry(detail.production_countries)?:"",
+            detail.release_date?:"",
+            detail.revenue?:0,
+            detail.runtime?:0,
+            convertLanguage(detail.spoken_languages)?:"",
+            detail.status?:"",
+            detail.tagline?:"",
+            detail.title?:"",
+            detail.video?:false,
+            detail.vote_average?:0.0,
+            detail.vote_count?:0
         )
     }
 
@@ -139,7 +140,7 @@ class DataToDomain @Inject constructor() {
                 if (trailer.site.equals("youtube", true)) {
                     movieTrailer =  MovieTrailer(
                         video.id,
-                        trailer.key
+                        trailer.key?:""
                     )
                 }
             }
@@ -170,7 +171,7 @@ class DataToDomain @Inject constructor() {
             it.results?.let {
                 for (i in 0..it.size - 1) {
                     val review = it.get(i)
-                    reviewList.add(Review(review.author, review.content, review.id, review.url))
+                    reviewList.add(Review(review.author?:"", review.content?:"", review.id?:"", review.url?:"", reviews.total_results))
                 }
             }
 

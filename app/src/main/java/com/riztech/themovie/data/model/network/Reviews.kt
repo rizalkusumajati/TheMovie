@@ -9,8 +9,8 @@ data class Reviews(
 )
 
 data class ResultReviews(
-    val author: String,
-    val content: String,
-    val id: String,
-    val url: String
+    val author: String?,
+    val content: String?,
+    val id: String?,
+    val url: String?
 )

@@ -61,13 +61,17 @@ fun convertGenre(list: List<com.riztech.themovie.data.model.network.Genre>): Str
     var listGenre = ""
     list?.let {
         for (i in 0..it.size - 1) {
-            listGenre += it.get(i).name
+            listGenre += it.get(i).name +","
+        }
+
+        if (listGenre.endsWith(",")){
+            listGenre = listGenre.substring(0, listGenre.length-1)
         }
     }
     return listGenre
 }
 
-fun convertLanguage(list: List<com.riztech.themovie.data.model.network.SpokenLanguage>): String {
+fun convertLanguage(list: List<com.riztech.themovie.data.model.network.SpokenLanguage>?): String {
     var listLang = ""
     list?.let {
         for (i in 0..it.size - 1) {
@@ -77,7 +81,7 @@ fun convertLanguage(list: List<com.riztech.themovie.data.model.network.SpokenLan
     return listLang
 }
 
-fun convertCompanies(list: List<ProductionCompanies>): String {
+fun convertCompanies(list: List<ProductionCompanies>?): String {
     var listCompanies = ""
     list?.let {
         for (i in 0..it.size - 1) {
@@ -87,7 +91,7 @@ fun convertCompanies(list: List<ProductionCompanies>): String {
     return listCompanies
 }
 
-fun convertCountry(list: List<com.riztech.themovie.data.model.network.ProductionCountries>): String {
+fun convertCountry(list: List<com.riztech.themovie.data.model.network.ProductionCountries>?): String {
     var listCountries = ""
     list?.let {
         for (i in 0..it.size - 1) {

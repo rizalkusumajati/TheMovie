@@ -1,19 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginHorizontal="12dp"
+    android:layout_marginVertical="@dimen/default_margin"
     android:orientation="vertical">
+
+    <ImageView
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/ivIcon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_account_circle"
+        app:tint="@color/colorPrimary"/>
+
     <TextView
+        app:layout_constraintLeft_toRightOf="@id/ivIcon"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ivIcon"
+        app:layout_constraintBottom_toBottomOf="@id/ivIcon"
+        android:layout_marginLeft="@dimen/default_margin"
         android:id="@+id/tvAuthor"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:textStyle="bold"
-        android:layout_width="match_parent"
+        tools:text="Switch"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"/>
 
     <TextView
-        android:id="@+id/tvOverview"
+        app:layout_constraintTop_toBottomOf="@id/ivIcon"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="@dimen/default_margin"
+        android:id="@+id/tvReview"
         android:textSize="14sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -28,8 +28,6 @@ class DetailRepositoryImpl @Inject constructor(private val movieApi: MovieApi, p
             try {
                 movieApi.getMovieDetail(movieId = movieId)?.let {
                     moviesDetailDao.insertMoviesDetail(mapper.networkToLocalDetail(it))
-                    Log.d("TAG", "SUCCESS NETWORK")
-
                     Resource.success(mapperToDomain.toDetail(it))
 
                 }
@@ -54,7 +52,6 @@ class DetailRepositoryImpl @Inject constructor(private val movieApi: MovieApi, p
         return withContext(Dispatchers.IO){
             val list = moviesDetailDao.select(movieId);
             if (list != null && list.id > 0){
-                Log.d("TAG", "SUCCESS LOCAL")
                 Resource.success(mapperToDomain.toDetail(list))
             }else{
                 getDetailMovieNetwork(movieId)
@@ -77,7 +74,15 @@ class DetailRepositoryImpl @Inject constructor(private val movieApi: MovieApi, p
             } catch (error: IOException) {
                 Resource.error(null, error.message?:"Error ")
             } catch (error: HttpException) {
-                Resource.error(null, error.message?:"Error ")
+                val body = error.response()!!.errorBody()
+                val gson = Gson()
+                val adapter: TypeAdapter<ErrorResponse> = gson.getAdapter(ErrorResponse::class.java)
+                try {
+                    val errorParser: ErrorResponse = adapter.fromJson(body!!.string())
+                    Resource.error(null, errorParser.status_message?: "Error")
+                } catch (e: IOException) {
+                    Resource.error(null, error.message()?: "Error")
+                }
             }
 
         }
@@ -87,7 +92,6 @@ class DetailRepositoryImpl @Inject constructor(private val movieApi: MovieApi, p
         return withContext(Dispatchers.IO){
             val list = trailerDao.select(movieId);
             if (list != null && list.id > 0){
-                Log.d("TAG", "SUCCESS LOCAL")
                 Resource.success(mapperToDomain.toTrailer(list))
             }else{
                 getMovieTrailerNetwork(movieId)
@@ -101,12 +105,19 @@ class DetailRepositoryImpl @Inject constructor(private val movieApi: MovieApi, p
             try {
                 movieApi.getReviewsMovie(movieId = movieId, page = page)?.let {
                     Resource.success(mapperToDomain.toReview(it))
-
                 }
             } catch (error: IOException) {
                 Resource.error(null, error.message?:"Error ")
             } catch (error: HttpException) {
-                Resource.error(null, error.message?:"Error ")
+                val body = error.response()!!.errorBody()
+                val gson = Gson()
+                val adapter: TypeAdapter<ErrorResponse> = gson.getAdapter(ErrorResponse::class.java)
+                try {
+                    val errorParser: ErrorResponse = adapter.fromJson(body!!.string())
+                    Resource.error(null, errorParser.status_message?: "Error")
+                } catch (e: IOException) {
+                    Resource.error(null, error.message()?: "Error")
+                }
             }
 
         }

@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/grey"
+    android:paddingBottom="16dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.DetailFragment">
 
@@ -45,26 +47,112 @@
 
             <TextView
                 android:id="@+id/tvTitle"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintLeft_toRightOf="@id/ivPosterDetail"
                 app:layout_constraintTop_toBottomOf="@id/trailer"
                 app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
                 android:ellipsize="marquee"
                 android:singleLine="true"
+                tools:text="Title Movie"
+                android:textStyle="bold"
+                android:textSize="18sp"
                 android:layout_marginTop="@dimen/default_margin" />
+
+            <ImageView
+                android:id="@+id/ivStar"
+                app:layout_constraintTop_toBottomOf="@id/tvTitle"
+                app:layout_constraintLeft_toLeftOf="@id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_star"
+                app:tint="@color/yellow"/>
+
+            <TextView
+                android:id="@+id/tvRating"
+                app:layout_constraintLeft_toRightOf="@id/ivStar"
+                app:layout_constraintTop_toTopOf="@id/ivStar"
+                app:layout_constraintBottom_toBottomOf="@id/ivStar"
+                app:layout_constraintRight_toRightOf="@id/tvTitle"
+                tools:text="3.2 (42839 votes)"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/tvYear"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/ivStar"
+                app:layout_constraintLeft_toLeftOf="@id/ivStar"
+                app:layout_constraintRight_toRightOf="@id/tvTitle"
+                tools:text="2018"/>
+            <TextView
+                android:id="@+id/tvGenre"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="@id/tvYear"
+                app:layout_constraintTop_toBottomOf="@id/tvYear"
+                app:layout_constraintRight_toRightOf="@id/tvTitle"
+                tools:text="Genre : action, adventure"/>
+
+            <View
+                android:layout_marginTop="16dp"
+                android:id="@+id/viewColor"
+                android:layout_width="5dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="16dp"
+                android:background="@color/colorPrimary"
+                app:layout_constraintTop_toBottomOf="@id/ivPosterDetail"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+
+            <TextView
+                android:id="@+id/infoOverview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toRightOf="@id/viewColor"
+                app:layout_constraintTop_toTopOf="@id/viewColor"
+                app:layout_constraintBottom_toBottomOf="@id/viewColor"
+                android:textSize="18sp"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:textStyle="bold"
+                android:text="@string/overview"
+                tools:text="OVERVIEW"/>
 
             <TextView
                 android:id="@+id/tvOverview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/ivPosterDetail"
+                app:layout_constraintTop_toBottomOf="@id/viewColor"
                 app:layout_constraintLeft_toLeftOf="parent"
-                android:textSize="12sp"
-                android:layout_marginTop="20dp"
+                android:textSize="14sp"
+                android:layout_marginTop="@dimen/default_margin"
                 android:layout_marginBottom="20dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"/>
+
+            <View
+                android:layout_marginTop="16dp"
+                android:id="@+id/viewColorReview"
+                android:layout_width="5dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="16dp"
+                android:background="@color/colorPrimary"
+                app:layout_constraintTop_toBottomOf="@id/tvOverview"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+
+            <TextView
+                android:id="@+id/infoReview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toRightOf="@id/viewColorReview"
+                app:layout_constraintTop_toTopOf="@id/viewColorReview"
+                app:layout_constraintBottom_toBottomOf="@id/viewColorReview"
+                android:textSize="18sp"
                 android:layout_marginLeft="@dimen/default_margin"
-                android:layout_marginRight="@dimen/default_margin"/>
+                android:textStyle="bold"
+                android:text="@string/review"
+                tools:text="Review (0)"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvReview"
@@ -73,7 +161,7 @@
                 android:minHeight="300dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginHorizontal="@dimen/default_margin"
-                app:layout_constraintTop_toBottomOf="@id/tvOverview"
+                app:layout_constraintTop_toBottomOf="@id/viewColorReview"
                 app:layout_constraintLeft_toLeftOf="parent"/>
 
             <ProgressBar
@@ -81,11 +169,12 @@
                 style="?android:attr/progressBarStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvOverview"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

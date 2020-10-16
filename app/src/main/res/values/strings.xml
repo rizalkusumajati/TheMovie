@@ -2,4 +2,7 @@
     <string name="app_name">TheMovie</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="overview">OVERVIEW</string>
+    <string name="review">REVIEW (0)</string>
+    <string name="home_info">Find movie by Genre</string>
 </resources>
